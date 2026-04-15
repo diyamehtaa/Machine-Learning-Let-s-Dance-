@@ -46,5 +46,9 @@ def split():
 
     y_test = test['danceability']
     x_test = test.drop(dropped_features, axis=1)
+    x_test = pd.get_dummies(x_test, columns=['track_genre'], drop_first=True)
+
+    x_validation = x_validation.reindex(columns=x_train.columns, fill_value=0)
+    x_test = x_test.reindex(columns=x_train.columns, fill_value=0)
 
     return (y_train, x_train, y_validation, x_validation, y_test, x_test)
